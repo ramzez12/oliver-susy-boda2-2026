@@ -1,0 +1,238 @@
+---
+// Agradecimiento.astro
+---
+
+<section class="relative w-full py-4 md:py-20 px-6 overflow-hidden ">
+  
+
+ 
+
+
+  <div class="max-w-3xl mx-auto relative z-10">
+
+    <!-- Contenido -->
+    <div class="text-center">
+      
+      <!-- Separador superior -->
+      <div class="separador-sup flex items-center justify-center gap-3 mb-8 opacity-0">
+        <div class="h-px w-16 bg-[#C8A75A]"></div>
+        <div class="w-2 h-2 rounded-full bg-[#C8A75A]"></div>
+        <div class="h-px w-16 bg-[#C8A75A]"></div>
+      </div>
+
+      <!-- Mensaje de agradecimiento -->
+      <div class="mensaje-gracias max-w-2xl mx-auto mb-6 opacity-0">
+        <p class="font-charm text-2xl md:text-3xl text-[#8FA58E] leading-relaxed mb-6">
+          Gracias por acompañarnos en este momento tan importante
+        </p>
+        <p class="font-charm text-3xl md:text-4xl text-[#C8A75A] font-bold">
+          ¡Te esperamos!
+        </p>
+      </div>
+
+      <!-- Iniciales -->
+      <p class="iniciales font-charm text-2xl md:text-3xl text-[#8FA58E] italic mt-8 opacity-0">
+        O & S
+      </p>
+
+
+      <!-- Separador inferior -->
+      <div class="separador-inf flex items-center justify-center gap-3 mt-8 opacity-0">
+        <div class="h-px w-16 bg-[#C8A75A]"></div>
+        <div class="w-2 h-2 rounded-full bg-[#C8A75A]"></div>
+        <div class="h-px w-16 bg-[#C8A75A]"></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .font-charm {
+    font-family: 'Charm', cursive !important;
+  }
+
+  /* Asegurar que las flores toquen el borde inferior */
+  .object-bottom-right {
+    object-position: bottom right;
+  }
+
+  .object-bottom-left {
+    object-position: bottom left;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animación flores derecha
+  gsap.fromTo('.flores-abajo-der',
+    {
+      opacity: 0,
+      x: 100,
+      y: 100,
+      rotation: 20
+    },
+    {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotation: 0,
+      duration: 1.5,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.flores-abajo-der',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación flores izquierda
+  gsap.fromTo('.flores-abajo-izq',
+    {
+      opacity: 0,
+      x: -100,
+      y: 100,
+      rotation: -20
+    },
+    {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotation: 0,
+      duration: 1.5,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.flores-abajo-izq',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación separador superior
+  gsap.fromTo('.separador-sup',
+    {
+      opacity: 0,
+      scale: 0.5
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      ease: 'back.out(1.5)',
+      scrollTrigger: {
+        trigger: '.separador-sup',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación mensaje de gracias
+  gsap.fromTo('.mensaje-gracias',
+    {
+      opacity: 0,
+      y: 60,
+      scale: 0.95
+    },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.3,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.mensaje-gracias',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación iniciales
+  gsap.fromTo('.iniciales',
+    {
+      opacity: 0,
+      y: 30,
+      scale: 0.9
+    },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: 'back.out(1.3)',
+      scrollTrigger: {
+        trigger: '.iniciales',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación flores decorativas
+  gsap.fromTo('.flor-izq',
+    {
+      opacity: 0,
+      x: -50,
+      rotation: -15
+    },
+    {
+      opacity: 1,
+      x: 0,
+      rotation: 0,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.flor-izq',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  gsap.fromTo('.flor-der',
+    {
+      opacity: 0,
+      x: 50,
+      rotation: 15
+    },
+    {
+      opacity: 1,
+      x: 0,
+      rotation: 0,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.flor-der',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación separador inferior
+  gsap.fromTo('.separador-inf',
+    {
+      opacity: 0,
+      scale: 0.5
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      ease: 'back.out(1.5)',
+      scrollTrigger: {
+        trigger: '.separador-inf',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+</script>

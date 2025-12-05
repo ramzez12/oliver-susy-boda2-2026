@@ -1,0 +1,46 @@
+---
+// FotoCompleta.astro
+---
+
+<section class="relative w-full">
+  <!-- Imagen con animación fade-in que se ejecuta solo una vez -->
+  <img 
+    src="/imagenes/m3.webp" 
+    alt="Foto de la pareja" 
+    class="w-full h-auto object-cover opacity-0 translate-y-8 transition-all duration-1000 ease-out"
+    data-animate
+  />
+</section>
+
+<script>
+  // Intersection Observer para detectar cuando la imagen entra en pantalla
+  const observerOptions = {
+    threshold: 0.1, // Se activa cuando el 10% de la imagen es visible
+    rootMargin: '0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Agregar clases de animación
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        
+        // Dejar de observar después de animar (solo una vez)
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observar todos los elementos con data-animate
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+<style>
+  /* Estilos adicionales si los necesitas */
+  img {
+    display: block;
+  }
+</style>

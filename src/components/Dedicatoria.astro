@@ -1,0 +1,247 @@
+---
+// InvitationText.astro
+---
+<section class="relative w-full">
+  <!-- Contenedor del texto sin fondo de color -->
+  <div class="relative w-full px-3 py-8 md:py-20">
+    
+    <!-- Flores decorativas en las esquinas superiores (sin animación) -->
+    <img 
+      src="/imagenes/FlorIzquierda.webp" 
+      alt="Flor decorativa" 
+      class="flor-izquierda absolute top-0 left-0 w-36 md:w-32 lg:w-40 h-auto z-20 opacity-0"
+    />
+    <img 
+      src="/imagenes/FlorDerecha.webp" 
+      alt="Flor decorativa" 
+      class="flor-derecha absolute top-0 right-0 w-36 md:w-32 lg:w-40 h-auto z-20 opacity-0"
+    />
+    
+    <!-- Todo el texto sobre la textura -->
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      
+      <!-- Primer párrafo -->
+      <p class="texto-animado font-charm text-[#8FA58E] text-xl md:text-2xl leading-normal font-light px-4 mt-20 opacity-0">
+        Compartimos risas, lágrimas y promesas, y ahora, con Dios como testigo, compartiremos el resto de nuestras vidas
+      </p>
+      
+      <!-- Divisor decorativo -->
+      <div class="divisor-animado flex items-center justify-center gap-4 my-6 opacity-0">
+        <div class="h-px w-20 bg-gradient-to-r from-transparent to-[#C8A75A]"></div>
+        <div class="w-2 h-2 rounded-full bg-[#C8A75A]"></div>
+        <div class="h-px w-20 bg-gradient-to-l from-transparent to-[#C8A75A]"></div>
+      </div>
+      
+      <!-- Frase de bendición -->
+      <div class="mb-2">
+        <p class="texto-animado font-charm text-xl md:text-3xl text-[#C8A75A] leading-relaxed px-4 opacity-0">
+          Con la bendición de Dios y de nuestros padres,
+uniremos nuestras vidas en matrimonio
+        </p>
+      </div>
+      
+      <!-- Divisor decorativo -->
+      <div class="divisor-animado flex items-center justify-center gap-3 my-4 opacity-0">
+        <div class="h-px w-16 bg-[#C8A75A]"></div>
+        <svg class="w-8 h-8 text-[#C8A75A]" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <div class="h-px w-16 bg-[#C8A75A]"></div>
+      </div>
+      
+      <!-- Grid de padres -->
+      <div class="grid md:grid-cols-2 gap-6 md:gap-16 mt-6 px-4">
+        
+        <!-- Padres del novio -->
+        <div class="padres-animado space-y-4 opacity-0">
+          <div class="mb-5">
+            <h3 class="font-charm text-2xl md:text-3xl text-[#C8A75A] mb-2">
+              Padres del novio
+            </h3>
+            <div class="h-px w-20 bg-[#d4af37] mx-auto"></div>
+          </div>
+          <p class="font-charm text-xl text-[#8FA58E] font-light leading-relaxed">
+            Richard Edward Menacho Vargas
+          </p>
+          <p class="font-charm text-xl text-[#8FA58E] font-light leading-relaxed">
+            Carmen Ribera Lola
+          </p>
+        </div>
+        
+        <!-- Padres de la novia -->
+        <div class="padres-animado space-y-4 opacity-0">
+          <div class="mb-5">
+            <h3 class="font-charm text-2xl md:text-3xl text-[#C8A75A] mb-2">
+              Padres de la novia
+            </h3>
+            <div class="h-px w-20 bg-[#C8A75A] mx-auto"></div>
+          </div>
+          <p class="font-charm text-xl text-[#8FA58E] font-light leading-relaxed">
+            Edwin Gabriel Jurado Correa
+          </p>
+          <p class="font-charm text-xl text-[#8FA58E] font-light leading-relaxed">
+            Karin Ana Fernández Fuentes
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Foto de los novios -->
+  <div class="w-full">
+    <img 
+      src="/imagenes/m2.webp" 
+      alt="Juan Carlos y Yamila" 
+      class="foto-animada w-full h-auto object-cover opacity-0"
+    />
+  </div>
+</section>
+
+<style>
+  /* Para texto con Charm */
+  .font-charm {
+    font-family: 'Charm', cursive !important;
+  }
+  
+  /* Sombra suave para mejor legibilidad */
+  p, h3 {
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animación elegante de entrada para las flores con scroll
+  gsap.fromTo('.flor-izquierda', 
+    {
+      opacity: 0,
+      x: -100,
+      rotation: -15
+    },
+    {
+      opacity: 0.9,
+      x: 0,
+      rotation: 0,
+      duration: 1.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.flor-izquierda',
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  gsap.fromTo('.flor-derecha', 
+    {
+      opacity: 0,
+      x: 100,
+      rotation: 15
+    },
+    {
+      opacity: 0.9,
+      x: 0,
+      rotation: 0,
+      duration: 1.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.flor-derecha',
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // Animación elegante de los textos desde abajo con fade (mismo tiempo)
+  const textosAnimados = document.querySelectorAll('.texto-animado');
+  textosAnimados.forEach((texto) => {
+    gsap.fromTo(texto,
+      {
+        opacity: 0,
+        y: 60
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.4,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: texto,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // Animación suave de los divisores solo con fade (sin rotación)
+  const divisores = document.querySelectorAll('.divisor-animado');
+  divisores.forEach((divisor) => {
+    gsap.fromTo(divisor,
+      {
+        opacity: 0,
+        scale: 0.8
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: divisor,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // Animación elegante de las secciones de padres (mismo tiempo)
+  const padresAnimados = document.querySelectorAll('.padres-animado');
+  padresAnimados.forEach((padre) => {
+    gsap.fromTo(padre,
+      {
+        opacity: 0,
+        y: 80,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.3,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: padre,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // Animación sofisticada de la foto con zoom suave
+  gsap.fromTo('.foto-animada',
+    {
+      opacity: 0,
+      scale: 1.1,
+      y: 50
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 1.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.foto-animada',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+</script>

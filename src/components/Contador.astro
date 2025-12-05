@@ -1,0 +1,116 @@
+---
+// contador.astro - Con animación GSAP de entrada única.
+---
+
+<section class="relative w-full md:py-12 ">
+  <div class="max-w-lg mx-auto relative">
+    
+    <div class="countdown-content relative z-10 px-4 md:px-8 md:py-12 opacity-0">
+      
+      <div class="mb-8 bg-white/60 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg">
+        <p class="text-center text-sm md:text-base text-[#8FA58E] font-medium mb-3">
+          Faltan:
+        </p>
+        <div id="contador" class="grid grid-cols-4 gap-2 md:gap-4">
+          <div class="text-center">
+            <div class="bg-gradient-to-br from-[#C8A75A] to-[#B8956A] rounded-lg p-2 md:p-3 shadow-md">
+              <span id="dias" class="block text-2xl md:text-3xl font-bold text-white">0</span>
+            </div>
+            <span class="block text-xs md:text-sm text-[#8FA58E] mt-1 font-medium">Días</span>
+          </div>
+          <div class="text-center">
+            <div class="bg-gradient-to-br from-[#C8A75A] to-[#B8956A] rounded-lg p-2 md:p-3 shadow-md">
+              <span id="horas" class="block text-2xl md:text-3xl font-bold text-white">0</span>
+            </div>
+            <span class="block text-xs md:text-sm text-[#8FA58E] mt-1 font-medium">Horas</span>
+          </div>
+          <div class="text-center">
+            <div class="bg-gradient-to-br from-[#C8A75A] to-[#B8956A] rounded-lg p-2 md:p-3 shadow-md">
+              <span id="minutos" class="block text-2xl md:text-3xl font-bold text-white">0</span>
+            </div>
+            <span class="block text-xs md:text-sm text-[#8FA58E] mt-1 font-medium">Mins</span>
+          </div>
+          <div class="text-center">
+            <div class="bg-gradient-to-br from-[#C8A75A] to-[#B8956A] rounded-lg p-2 md:p-3 shadow-md">
+              <span id="segundos" class="block text-2xl md:text-3xl font-bold text-white">0</span>
+            </div>
+            <span class="block text-xs md:text-sm text-[#8FA58E] mt-1 font-medium">Segs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Para texto con Charm */
+  .font-charm {
+    font-family: 'Charm', cursive !important;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ⭐ NUEVA ANIMACIÓN: Entrada única (se ejecuta una vez y se queda)
+  let animacionEjecutada = false;
+
+  ScrollTrigger.create({
+    trigger: '.countdown-content',
+    start: 'top 80%', // Inicia cuando el elemento está al 80% del viewport
+    once: true, // ⭐ Propiedad clave: Solo se ejecuta una vez
+    onEnter: () => {
+      if (!animacionEjecutada) {
+        gsap.fromTo('.countdown-content', 
+          {
+            opacity: 0,
+            y: 50
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+          }
+        );
+        animacionEjecutada = true;
+      }
+    }
+  });
+
+
+  // CONTADOR REGRESIVO
+  function actualizarContador() {
+    const fechaBoda = new Date('2026-01-18T00:00:00').getTime();
+    const ahora = new Date().getTime();
+    const diferencia = fechaBoda - ahora;
+
+    const diasElement = document.getElementById('dias');
+    const horasElement = document.getElementById('horas');
+    const minutosElement = document.getElementById('minutos');
+    const segundosElement = document.getElementById('segundos');
+    const contadorContainer = document.getElementById('contador');
+
+    if (diferencia > 0) {
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      if (diasElement) diasElement.textContent = dias;
+      if (horasElement) horasElement.textContent = horas;
+      if (minutosElement) minutosElement.textContent = minutos;
+      if (segundosElement) segundosElement.textContent = segundos;
+      
+    } else if (contadorContainer) {
+      contadorContainer.innerHTML = '<p class="text-center text-[#C8A75A] font-bold text-xl">¡Es hoy!</p>';
+    }
+  }
+
+  // Inicializar y actualizar el contador
+  actualizarContador();
+  const intervalId = setInterval(actualizarContador, 1000);
+</script>
